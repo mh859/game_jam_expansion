@@ -29,13 +29,12 @@ func _process(delta):
 		text_animation_player.stop()
 	# Stress
 	if destressing_state:
-		print("destressing")
 		self.stress -= 5
 		self.stress = max(0, self.stress)
 		destressing_state = false
 	if self.num_of_tasks > 5:
-		self.stress += .01
-		self.stress = min(5, self.stress)
+		self.stress += .005
+		self.stress = min(8, self.stress)
 		animated_sprite_2d.speed_scale = self.stress
 	else:
 		self.stress -= .01

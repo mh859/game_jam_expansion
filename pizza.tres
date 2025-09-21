@@ -1,0 +1,6 @@
+[gd_resource type="CanvasTexture" load_steps=2 format=3 uid="uid://qkb238v0o4fq"]
+
+[ext_resource type="Texture2D" uid="uid://1a21vanq38hr" path="res://pizza.png" id="1_q46hf"]
+
+[resource]
+diffuse_texture = ExtResource("1_q46hf")

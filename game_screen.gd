@@ -7,11 +7,16 @@ extends Node2D
 @onready var money = $bckground/PerformancePanel/VBoxContainer/Money
 
 #buttons
-@onready var new_hire = $bckground/PerformancePanel/VBoxContainer/NewHire
-@onready var pizza_party = $bckground/PerformancePanel/VBoxContainer/PizzaParty
-@onready var integrate_ai = $bckground/PerformancePanel/VBoxContainer/IntegrateAI
+#@onready var new_hire = $bckground/PerformancePanel/VBoxContainer/NewHire
+#@onready var pizza_party = $bckground/PerformancePanel/VBoxContainer/PizzaParty
+#@onready var integrate_ai = $bckground/PerformancePanel/VBoxContainer/IntegrateAI
+@onready var pizza_party = $bckground/PerformancePanel/VBoxContainer/VBoxContainer2/HBoxContainer3/PizzaParty
+@onready var integrate_ai = $bckground/PerformancePanel/VBoxContainer/VBoxContainer2/HBoxContainer2/IntegrateAI
+@onready var new_hire = $bckground/PerformancePanel/VBoxContainer/VBoxContainer2/HBoxContainer/NewHire
+@onready var morale_timer = $MoraleTimer
 
 var end_game = false
+var end_type = "workers"
 var line_count = 0
 var tech_debt_count = 0
 var things_to_do = 0
@@ -38,8 +43,15 @@ func _ready():
 @onready var ai_2_animation_player = $bckground/AI2/RichTextLabel/AI2AnimationPlayer
 @onready var ai_3_animation_player = $bckground/AI3/RichTextLabel/AI3AnimationPlayer
 
+@onready var ai_3 = $bckground/AI3
+@onready var ui = $UI
+@onready var label = $UI/end_screen/ColorRect/Label
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if len(workers) == 0:
+		end_game=true
+		label.text = "You lost all your employees. Not Good."
+		ui.visible = true
 	if end_game:
 		return
 	if ai_multiplier == 2:
@@ -48,9 +60,10 @@ func _process(delta):
 		ai_2_animation_player.play("text")
 	if ai_multiplier == 4:
 		ai_3_animation_player.play("text")
-		trigger_end()
-	if tech_debt_count > 30:
-		self.tech_debt_stress.emit()
+		trigger_ai_end()
+		
+	#if tech_debt_count > 30:
+	#	self.tech_debt_stress.emit()
 	money.text = "Money: $" + str(runway) 
 	#moral
 	var combined_stress = 0 
@@ -58,14 +71,22 @@ func _process(delta):
 	for single_worker in workers:
 		combined_stress += single_worker.stress
 	#print(combined_stress)
-	if combined_stress > num_of_workers + 2:
+	
+	if combined_stress > num_of_workers + 2 and combined_stress < num_of_workers + 5:
 		morale_status = "BAD"
+	elif combined_stress > num_of_workers + 5:
+		morale_status = "TERRIBLE"
 	elif combined_stress > num_of_workers - 2 and combined_stress < num_of_workers + 2:
 		morale_status = "FAIR"
 	else:
 		morale_status = "GOOD" 
 	employee_morale.text = "Employee Morale: " + morale_status
-		
+	if morale_status == "TERRIBLE":
+		#print("strat")
+		morale_timer.paused = false
+	else:
+		morale_timer.paused = true
+		morale_timer.start()
 	toggle_upgrade_buttons()
 
 #helpers
@@ -86,11 +107,10 @@ func toggle_upgrade_buttons():
 		new_hire.disabled = false
 	else:
 		new_hire.disabled = true
-@onready var ai_3 = $bckground/AI3
-@onready var ui = $UI
 
 
-func trigger_end():
+
+func trigger_ai_end():
 	end_game=true
 	for i in [16, 18, 19, 19, 19, 20, 20, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22]:
 		#print(i)
@@ -102,9 +122,7 @@ func trigger_end():
 		
 
 	await get_tree().create_timer(5.0).timeout
-	print("done")
 	ui.visible = true
-	
 	
 	
 #signals
@@ -114,10 +132,13 @@ func _on_worker_finished_task():
 	line_count += rand_code_count * self.ai_multiplier
 	lines_of_code.text = "Lines Of Code: " + str(line_count)
 	#tech debt
-	var rand_tech_debt = randi_range(-3, 5)
-	tech_debt_count += rand_tech_debt 
-	tech_debt_count = max(0, tech_debt_count) * self.ai_multiplier
-	tech_debt.text = "Tech Debt: " + str(tech_debt_count)
+	if tech_debt_count < 100000000000000000:
+		var rand_tech_debt = randi_range(-3, 5)
+		tech_debt_count += rand_tech_debt 
+		tech_debt_count = max(0, tech_debt_count) * self.ai_multiplier
+		tech_debt.text = "Tech Debt: " + str(tech_debt_count)
+	else:
+		tech_debt.text = "Tech Debt: TOO MUCH"
 	# things to do
 	if things_to_do >= 1:
 		things_to_do -= 1 
@@ -135,13 +156,15 @@ func _on_timer_timeout():
 	things_to_do += 1
 	to_do.text = "Things To Do: " + str(things_to_do)
 
+@onready var pizza = $"bckground/Pizza Party/Pizza"
 
 func _on_pizza_party_pressed():
 	self.runway -= 500
+	pizza.emitting = true
 	money.text = "Money: $" + str(runway) 
 	for single_worker in workers:
 		single_worker.stress = 0
-		single_worker.num_of_tasks = 5
+		single_worker.num_of_tasks = 0
 		#self.destress.connect(single_worker)
 
 func _on_worker_2_finished_task():
@@ -178,6 +201,7 @@ func _on_new_hire_pressed():
 	var node_name = "Worker"+str(index)
 	var new_worker = get_tree().current_scene.get_node(node_name)
 	new_worker.visible = true
+	workers.append(new_worker)
 	worker_index += 1
 	
 	
@@ -191,4 +215,18 @@ func _on_integrate_ai_pressed():
 
 
 
+
+
+
+func _on_morale_timer_timeout():
+	if len(workers) == 0:
+		print("yes")
+
+		end_game=true
+		ui.visible = true
+	else:
+		var recent_worker_ind = len(workers) - 1
+		workers[recent_worker_ind].visible = false
+		workers.pop_back()
+		print(workers)
 

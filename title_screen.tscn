@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://1ls7m1hmkb3e"]
+[gd_scene load_steps=3 format=3 uid="uid://1ls7m1hmkb3e"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_6ic2k"]
+[ext_resource type="Texture2D" uid="uid://neg0pqutho8l" path="res://Untitled_Artwork.png" id="2_hm5xb"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_6ic2k")
@@ -17,10 +18,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="ActualTitle"]
+layout_mode = 0
 offset_left = 151.0
-offset_top = 152.0
+offset_top = 56.0
 offset_right = 998.0
-offset_bottom = 224.0
+offset_bottom = 128.0
 theme_override_font_sizes/font_size = 50
 text = "Who Cares About Growth Potential
 "
@@ -28,20 +30,26 @@ text = "Who Cares About Growth Potential
 [node name="StartButton" type="Button" parent="ActualTitle"]
 layout_mode = 0
 offset_left = 452.0
-offset_top = 376.0
+offset_top = 436.0
 offset_right = 677.0
-offset_bottom = 439.0
+offset_bottom = 499.0
 theme_override_font_sizes/font_size = 40
 text = "Start Game"
 
 [node name="Instructions" type="Button" parent="ActualTitle"]
 layout_mode = 0
 offset_left = 419.0
-offset_top = 444.0
+offset_top = 504.0
 offset_right = 718.0
-offset_bottom = 521.0
+offset_bottom = 581.0
 theme_override_font_sizes/font_size = 40
 text = "Instructions"
+
+[node name="Sprite2D" type="Sprite2D" parent="ActualTitle"]
+modulate = Color(1, 1, 1, 0.894118)
+position = Vector2(619, 341)
+scale = Vector2(0.497487, 0.253597)
+texture = ExtResource("2_hm5xb")
 
 [node name="BackStory" type="Control" parent="."]
 visible = false
@@ -51,6 +59,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TextEdit" type="RichTextLabel" parent="BackStory"]
+layout_mode = 0
 offset_left = 125.0
 offset_top = 97.0
 offset_right = 997.0

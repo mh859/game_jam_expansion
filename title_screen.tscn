@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://1ls7m1hmkb3e"]
+[gd_scene load_steps=5 format=3 uid="uid://1ls7m1hmkb3e"]
 
 [ext_resource type="Script" path="res://title_screen.gd" id="1_6ic2k"]
+[ext_resource type="FontFile" uid="uid://bb7ubynldjpav" path="res://AlteHaasGroteskBold.ttf" id="2_2jhoe"]
 [ext_resource type="Texture2D" uid="uid://neg0pqutho8l" path="res://Untitled_Artwork.png" id="2_hm5xb"]
+[ext_resource type="FontFile" uid="uid://d0lt2nukme5g8" path="res://AlteHaasGroteskRegular.ttf" id="4_degxt"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_6ic2k")
@@ -23,16 +25,18 @@ offset_left = 151.0
 offset_top = 56.0
 offset_right = 998.0
 offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("2_2jhoe")
 theme_override_font_sizes/font_size = 50
 text = "Who Cares About Growth Potential
 "
 
 [node name="StartButton" type="Button" parent="ActualTitle"]
 layout_mode = 0
-offset_left = 452.0
+offset_left = 451.0
 offset_top = 436.0
-offset_right = 677.0
+offset_right = 676.0
 offset_bottom = 499.0
+theme_override_fonts/font = ExtResource("2_2jhoe")
 theme_override_font_sizes/font_size = 40
 text = "Start Game"
 
@@ -42,6 +46,7 @@ offset_left = 419.0
 offset_top = 504.0
 offset_right = 718.0
 offset_bottom = 581.0
+theme_override_fonts/font = ExtResource("2_2jhoe")
 theme_override_font_sizes/font_size = 40
 text = "Instructions"
 
@@ -65,6 +70,7 @@ offset_top = 97.0
 offset_right = 997.0
 offset_bottom = 541.0
 size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("4_degxt")
 theme_override_font_sizes/normal_font_size = 20
 text = "You are the founder of a tech startup that you believe is super unique and totally necessary. You've decided you need to demonstrate growth potential to investors to get more funding. 
 
@@ -78,19 +84,22 @@ Go forth and make your investors happy so you can expand your company (and profi
 
 [node name="LetsGo" type="Button" parent="BackStory"]
 layout_mode = 0
-offset_left = 491.0
-offset_top = 417.0
-offset_right = 631.0
+offset_left = 452.0
+offset_top = 399.0
+offset_right = 689.0
 offset_bottom = 467.0
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("2_2jhoe")
+theme_override_font_sizes/font_size = 50
 text = "Lets Go!!!"
 
 [node name="BackToStart" type="Button" parent="BackStory"]
 layout_mode = 0
-offset_left = 508.0
-offset_top = 499.0
-offset_right = 618.0
-offset_bottom = 530.0
+offset_left = 466.0
+offset_top = 498.0
+offset_right = 665.0
+offset_bottom = 543.0
+theme_override_fonts/font = ExtResource("2_2jhoe")
+theme_override_font_sizes/font_size = 30
 text = "Back To Start"
 
 [node name="Instructions" type="Control" parent="."]
@@ -102,10 +111,12 @@ offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="Instructions"]
 layout_mode = 0
-offset_left = 192.0
-offset_top = 88.0
-offset_right = 970.0
-offset_bottom = 533.0
+offset_left = 132.0
+offset_top = 98.0
+offset_right = 1049.0
+offset_bottom = 543.0
+theme_override_fonts/font = ExtResource("4_degxt")
+theme_override_font_sizes/font_size = 20
 text = "This game is inspired by incremental games like cookie clicker. 
 Controls: 
 - Use your mouse to click on your employees to assign tasks. Each completed task will earn you $100.
@@ -125,6 +136,7 @@ offset_left = 387.0
 offset_top = 492.0
 offset_right = 768.0
 offset_bottom = 555.0
+theme_override_fonts/font = ExtResource("2_2jhoe")
 theme_override_font_sizes/font_size = 40
 text = "Back To Start Menu"
 

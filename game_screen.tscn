@@ -1,16 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://detq41mfbn72b"]
+[gd_scene load_steps=21 format=3 uid="uid://detq41mfbn72b"]
 
 [ext_resource type="PackedScene" uid="uid://cdvsch0swdahw" path="res://worker.tscn" id="1_8ewb7"]
-[ext_resource type="Shader" path="res://shader/lcd.gdshader" id="1_cfb8i"]
 [ext_resource type="Script" path="res://game_screen.gd" id="1_nc8ki"]
 [ext_resource type="Texture2D" uid="uid://b7w6mjn4duyka" path="res://window.png" id="2_i5vpn"]
 [ext_resource type="Texture2D" uid="uid://qkb238v0o4fq" path="res://pizza.tres" id="2_iib6v"]
+[ext_resource type="FontFile" uid="uid://d0lt2nukme5g8" path="res://AlteHaasGroteskRegular.ttf" id="2_lfwpd"]
 [ext_resource type="Script" path="res://end_screen.gd" id="5_erkry"]
 [ext_resource type="Shader" path="res://shader/crt.gdshader" id="7_wsabt"]
 
 [sub_resource type="Theme" id="Theme_afaqf"]
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 23
+Label/fonts/font = ExtResource("2_lfwpd")
 
 [sub_resource type="Animation" id="Animation_dywcw"]
 length = 2.0
@@ -124,11 +125,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bb38"]
-shader = ExtResource("1_cfb8i")
-shader_parameter/stripe = 0.5
-shader_parameter/scan = 0.5
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wxqu"]
 shader = ExtResource("7_wsabt")
 
@@ -221,14 +217,17 @@ text = "Employee Morale: GOOD"
 
 [node name="Label" type="Label" parent="bckground/PerformancePanel/VBoxContainer/EmployeeMorale"]
 layout_mode = 0
-offset_left = 2.0
+offset_left = 1.0
 offset_top = 30.0
-offset_right = 322.0
+offset_right = 354.0
 offset_bottom = 76.0
 theme_override_constants/line_spacing = 1
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "the better the morale, the less tech debt.
 if this stays 'TERRIBLE\" for too long, employees will quit"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="bckground/PerformancePanel/VBoxContainer"]
+layout_mode = 2
 
 [node name="Money" type="Label" parent="bckground/PerformancePanel/VBoxContainer"]
 layout_mode = 2
@@ -242,9 +241,6 @@ offset_right = 208.0
 offset_bottom = 59.0
 theme_override_font_sizes/font_size = 14
 text = "+ $100 per task completed "
-
-[node name="VBoxContainer" type="VBoxContainer" parent="bckground/PerformancePanel/VBoxContainer"]
-layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="bckground/PerformancePanel/VBoxContainer"]
 layout_mode = 2
@@ -269,7 +265,7 @@ offset_top = 5.0
 offset_right = 482.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 14
 text = "++ coding speed"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="bckground/PerformancePanel/VBoxContainer/VBoxContainer2"]
@@ -289,7 +285,7 @@ offset_left = 211.0
 offset_right = 304.0
 offset_bottom = 40.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 14
 text = "+ coding speed
 + tech debt"
 
@@ -309,7 +305,7 @@ offset_left = 216.0
 offset_right = 313.0
 offset_bottom = 40.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 14
 text = "++ morale
 reset task queue"
 
@@ -788,6 +784,7 @@ offset_left = 35.0
 offset_top = 22.0
 offset_right = 523.0
 offset_bottom = 225.0
+theme_override_fonts/font = ExtResource("2_lfwpd")
 theme_override_font_sizes/font_size = 18
 text = "To keep up with the unreasonable amount of tasks, you opted to offload decision making and design to AI and now your codebase is unreadable and riddled with tech debt. 
 All your engineers quit but at least you can call yourself a trendy AI startup and catch the eye of investors. So worth it. The End."
@@ -803,16 +800,6 @@ text = "Try Again?"
 
 [node name="MoraleTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.0588235)
-self_modulate = Color(1, 1, 1, 0.0156863)
-material = SubResource("ShaderMaterial_1bb38")
-offset_right = 1157.0
-offset_bottom = 652.0
-mouse_filter = 2
-color = Color(0.4, 0.380392, 0, 0.356863)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

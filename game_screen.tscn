@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://detq41mfbn72b"]
+[gd_scene load_steps=22 format=3 uid="uid://detq41mfbn72b"]
 
 [ext_resource type="PackedScene" uid="uid://cdvsch0swdahw" path="res://worker.tscn" id="1_8ewb7"]
 [ext_resource type="Script" path="res://game_screen.gd" id="1_nc8ki"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://d0lt2nukme5g8" path="res://AlteHaasGroteskRegular.ttf" id="2_lfwpd"]
 [ext_resource type="Script" path="res://end_screen.gd" id="5_erkry"]
 [ext_resource type="Shader" path="res://shader/crt.gdshader" id="7_wsabt"]
+[ext_resource type="AudioStream" uid="uid://u5g6qsyeicok" path="res://program clicker.wav" id="8_sdks2"]
 
 [sub_resource type="Theme" id="Theme_afaqf"]
 Label/colors/font_color = Color(0, 0, 0, 1)
@@ -808,6 +809,10 @@ material = SubResource("ShaderMaterial_0wxqu")
 position = Vector2(576.5, 323.5)
 scale = Vector2(1.00608, 1.01389)
 mesh = SubResource("QuadMesh_f1ndw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_sdks2")
+autoplay = true
 
 [connection signal="tech_debt_stress" from="." to="Worker" method="_on_game_screen_tech_debt_stress"]
 [connection signal="pressed" from="bckground/PerformancePanel/VBoxContainer/VBoxContainer2/HBoxContainer/NewHire" to="." method="_on_new_hire_pressed"]

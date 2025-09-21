@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://daggt5qydgcic"]
+
+[ext_resource type="Script" path="res://end_screen.gd" id="1_qtgol"]
+
+[node name="end_screen" type="Node2D"]
+script = ExtResource("1_qtgol")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 302.0
+offset_top = 170.0
+offset_right = 858.0
+offset_bottom = 449.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 22.0
+offset_right = 523.0
+offset_bottom = 225.0
+theme_override_font_sizes/font_size = 18
+text = "To keep up with the unreasonable amount of tasks, you opted to offload decision making and design to AI and now your codebase is unreadable and riddled with tech debt. 
+All your engineers quit but at least you can call yourself a trendy AI startup and catch the eye of investors. So worth it. The End."
+autowrap_mode = 3
+
+[node name="Restart" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 228.0
+offset_right = 327.0
+offset_bottom = 276.0
+text = "Try Again?"
